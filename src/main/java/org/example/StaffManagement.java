@@ -31,10 +31,10 @@ public class StaffManagement {
     public void updateEmployeeSalary(int id, int newSalary) {
         for (Staff staffMember : staff) {
             if (staffMember instanceof Employee && staffMember.getId() == id) {
-                Employee employee = (Employee) staffMember; // Cast to Employee
-                employee.setSalary(newSalary); // Update the salary
+                Employee employee = (Employee) staffMember;
+                employee.setSalary(newSalary);
                 System.out.println("Employee salary updated!");
-                return; // Exit the loop once the employee is found and updated
+                return;
             }
         }
         System.out.println("Employee with ID " + id + " not found.");

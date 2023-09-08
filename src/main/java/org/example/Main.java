@@ -21,10 +21,11 @@ public class Main {
         System.out.print("new salary: ");
         int salaryChange = Integer.parseInt(scanner.nextLine());
         staffManagement.updateEmployeeSalary(idChange, salaryChange);
+
         staffManagement.displayStaff();
 
 
-        new MenuStructure ("hej välkommen", new ArrayList<>(List.of("1.hej","2.hej")));
+        new MenuStructure ("Hej & välkommen", new ArrayList<>(List.of("1.Display Staff","2.Add Staff", "3.Edit Staff", "4.Exit Program")));
 
 
     }
