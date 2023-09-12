@@ -1,6 +1,8 @@
 package org.example;
 
+import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -10,23 +12,77 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         StaffManagement staffManagement = new StaffManagement();
-        staffManagement.addEmployee("Magdalena Andersson", "Female", 1, "Employee", LocalDate.now(), 35000);
-        staffManagement.addTrainee("Johnny Oil", "Male", 2, "Trainee", LocalDate.now(), LocalDate.of(2023, 12, 12));
+        MenuStructure mainMenu = new MenuStructure("Hej & välkommen", new ArrayList<>(List.of("1.Display Staff", "2.Add Staff", "3.Edit Staff", "4.Exit Program")));
 
+        staffManagement.addEmployee("Magdalena Andersson", "Female", 1, LocalDate.now(), 35000);
 
-        staffManagement.displayStaff();
+        staffManagement.addTrainee("Johnny Oil", "Male", 2, LocalDate.now(), LocalDate.of(2023, 12, 12));
+        while (true) {
+            System.out.println(mainMenu.getDescription());
 
-        System.out.print("Enter id: ");
-        int idChange = Integer.parseInt(scanner.nextLine());
-        System.out.print("new salary: ");
-        int salaryChange = Integer.parseInt(scanner.nextLine());
-        staffManagement.updateEmployeeSalary(idChange, salaryChange);
+            for (int i = 0; i < mainMenu.getOptions().toArray().length; i++) {
+                System.out.println(mainMenu.getOptions().toArray()[i]);
+            }
+            System.out.println("Enter menu option: ");
 
-        staffManagement.displayStaff();
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            switch (choice) {
+                case 1:
+                    staffManagement.displayStaff();
+                    break;
+                case 2:
+                    System.out.println("Choose number for what employment the new staff shall have2\n1.Employee\n2.Trainee");
 
-
-        new MenuStructure ("Hej & välkommen", new ArrayList<>(List.of("1.Display Staff","2.Add Staff", "3.Edit Staff", "4.Exit Program")));
-
-
+                    int staffChoice = scanner.nextInt();
+                    scanner.nextLine();
+                    switch (staffChoice) {
+                        case 1:
+                            System.out.println("Enter name of the new employee: ");
+                            String employeeName = scanner.nextLine();
+                            System.out.println("Enter gender of the new employee: ");
+                            String employeeGender = scanner.nextLine();
+                            System.out.println("Enter id of the new employee: ");
+                            int employeeId = scanner.nextInt();
+                            scanner.nextLine();
+                            System.out.println("Enter start date of the new employee (YYYY-MM-DD): ");
+                            LocalDate employeeStartDate = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ISO_LOCAL_DATE);
+                            System.out.println("Enter salary of the new employee: ");
+                            int employeeSalary = scanner.nextInt();
+                            scanner.nextLine();
+                            staffManagement.addEmployee(employeeName, employeeGender, employeeId, employeeStartDate, employeeSalary);
+                            break;
+                        case 2:
+                            System.out.println("Enter name of the new trainee: ");
+                            String traineeName = scanner.nextLine();
+                            System.out.println("Enter gender of the new trainee: ");
+                            String traineeGender = scanner.nextLine();
+                            System.out.println("Enter id of the new trainee: ");
+                            int traineeId = scanner.nextInt();
+                            scanner.nextLine();
+                            System.out.println("Enter start date of trainee: ");
+                            LocalDate traineeStartDate = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ISO_LOCAL_DATE);
+                            System.out.println("Enter end date of trainee: ");
+                            LocalDate traineeEndDate = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ISO_LOCAL_DATE);
+                            staffManagement.addTrainee(traineeName, traineeGender, traineeId, traineeStartDate, traineeEndDate);
+                            break;
+                    }
+                case 3:
+                    staffManagement.displayStaff();
+                    System.out.print("Enter id: ");
+                    int idChange = Integer.parseInt(scanner.nextLine());
+                    System.out.print("new salary: ");
+                    int salaryChange = Integer.parseInt(scanner.nextLine());
+                    staffManagement.updateEmployeeSalary(idChange, salaryChange);
+                    staffManagement.displayStaff();
+            }
+        }
     }
+
+
+
+
+
+
 }
+

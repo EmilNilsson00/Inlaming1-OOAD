@@ -12,5 +12,14 @@ public class MenuStructure {
         this.options = options;
     }
     //Skapa method för att skriva ut Menyn.
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public ArrayList<String> getOptions() {
+        return options;
+    }
 }
 

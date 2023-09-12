@@ -9,7 +9,6 @@ public class Staff {
     private String gender;
     private int id;
     private String employment;
-
     private LocalDate startDate;
 
     public Staff(String name, String gender, int id, String employment, LocalDate startDate) {
