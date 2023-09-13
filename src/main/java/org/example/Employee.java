@@ -20,4 +20,8 @@ public class Employee extends Staff {
     public void setSalary(int newSalary) {
          this.salary = newSalary;
     }
+
+    public int getSalary() {
+        return salary;
+    }
 }

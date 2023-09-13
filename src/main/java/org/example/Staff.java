@@ -21,10 +21,18 @@ public class Staff {
 
     @Override
     public String toString() {
-        return "Name: " + name + "\nGender: " + gender + "\nID: " + id + "\nEmployment: " + employment + "\nstartDate (yy-mm-dd): " + startDate;
+        return "Name: " + name + "\nGender: " + gender + "\nID: " + id + "\nEmployment: " + employment + "\nStart date (yyyy-mm-dd): " + startDate;
     }
 
     public int getId() {
         return id;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
     }
 }

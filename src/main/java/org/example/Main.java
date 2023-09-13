@@ -12,11 +12,11 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         StaffManagement staffManagement = new StaffManagement();
-        MenuStructure mainMenu = new MenuStructure("Hej & välkommen", new ArrayList<>(List.of("1.Display Staff", "2.Add Staff", "3.Edit Staff", "4.Exit Program")));
+        MenuStructure mainMenu = new MenuStructure("Hej & välkommen", new ArrayList<>(List.of("1.Display Staff", "2.Add Staff", "3.Edit Staff", "4.Display average salary", "5.Exit the program")));
 
         staffManagement.addEmployee("Magdalena Andersson", "Female", 1, LocalDate.now(), 35000);
 
-        staffManagement.addTrainee("Johnny Oil", "Male", 2, LocalDate.now(), LocalDate.of(2023, 12, 12));
+        staffManagement.addTrainee("Johnny Oil", "Male", 2, LocalDate.now(), LocalDate.of(2023, 12, 12), "");
         while (true) {
             System.out.println(mainMenu.getDescription());
 
@@ -29,10 +29,11 @@ public class Main {
             scanner.nextLine();
             switch (choice) {
                 case 1:
-                    staffManagement.displayStaff();
+                    System.out.println("Total amount of staff: " + staffManagement.staff.toArray().length + "\n---------------");
+                    staffManagement.displayStaffByEmploymentDate();
                     break;
                 case 2:
-                    System.out.println("Choose number for what employment the new staff shall have2\n1.Employee\n2.Trainee");
+                    System.out.println("Choose number for what employment the new staff shall have\n1.Employee\n2.Trainee");
 
                     int staffChoice = scanner.nextInt();
                     scanner.nextLine();
@@ -64,17 +65,31 @@ public class Main {
                             LocalDate traineeStartDate = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ISO_LOCAL_DATE);
                             System.out.println("Enter end date of trainee: ");
                             LocalDate traineeEndDate = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ISO_LOCAL_DATE);
-                            staffManagement.addTrainee(traineeName, traineeGender, traineeId, traineeStartDate, traineeEndDate);
+                            System.out.println("Some nice words about the trainee: ");
+                            String traineeWittyWords = scanner.nextLine();
+                            staffManagement.addTrainee(traineeName, traineeGender, traineeId, traineeStartDate, traineeEndDate, traineeWittyWords);
                             break;
-                    }
+                    } break;
                 case 3:
-                    staffManagement.displayStaff();
+                    staffManagement.displayEmployees();
+                    staffManagement.displayTrainees();
                     System.out.print("Enter id: ");
                     int idChange = Integer.parseInt(scanner.nextLine());
                     System.out.print("new salary: ");
                     int salaryChange = Integer.parseInt(scanner.nextLine());
                     staffManagement.updateEmployeeSalary(idChange, salaryChange);
-                    staffManagement.displayStaff();
+                    staffManagement.displayEmployees();
+                    staffManagement.displayTrainees();
+                case 4:
+                    double averageMaleEmployeeSalary = staffManagement.calculateAverageMaleEmployeeSalary();
+                    double averageFemaleEmployeeSalary = staffManagement.calculateAverageFemaleEmployeeSalary();
+                    break;
+                case 5:
+                    System.out.println("Exiting the program.");
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    break;
             }
         }
     }
