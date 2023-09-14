@@ -104,8 +104,7 @@ public class StaffManagement {
     }
     public void displayStaffByEmploymentDate() {
          List<Staff> sortedStaff = staff.stream()
-                .sorted(Comparator.comparing(Staff::getStartDate))
-                .collect(Collectors.toList());
+                 .sorted(Comparator.comparing(Staff::getStartDate)).toList();
 
         for (Staff staffMember : sortedStaff) {
             System.out.println(staffMember);

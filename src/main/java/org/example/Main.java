@@ -61,9 +61,9 @@ public class Main {
                             System.out.println("Enter id of the new trainee: ");
                             int traineeId = scanner.nextInt();
                             scanner.nextLine();
-                            System.out.println("Enter start date of trainee: ");
+                            System.out.println("Enter start date of trainee (YYYY-MM-DD): ");
                             LocalDate traineeStartDate = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ISO_LOCAL_DATE);
-                            System.out.println("Enter end date of trainee: ");
+                            System.out.println("Enter end date of trainee(YYYY-MM-DD): ");
                             LocalDate traineeEndDate = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ISO_LOCAL_DATE);
                             System.out.println("Some nice words about the trainee: ");
                             String traineeWittyWords = scanner.nextLine();
